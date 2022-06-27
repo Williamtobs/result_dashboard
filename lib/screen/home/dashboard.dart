@@ -44,6 +44,7 @@ class Dashboard extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return OptionCard(
                         term: _options[index].term,
+                        file: _options[index].file,
                       );
                     }),
               )
@@ -52,15 +53,16 @@ class Dashboard extends StatelessWidget {
 }
 
 const List<OptionCard> _options = [
-  OptionCard(term: 'ND I First Semester'),
-  OptionCard(term: 'ND I Second Semester'),
-  OptionCard(term: 'ND II First Semester'),
-  OptionCard(term: 'ND II Second Semester'),
+  OptionCard(term: 'ND I First Semester', file: 'NdI_first',),
+  OptionCard(term: 'ND I Second Semester', file: 'NdI_second',),
+  OptionCard(term: 'ND II First Semester', file: 'NdII_first',),
+  OptionCard(term: 'ND II Second Semester', file: 'NdII_second',),
 ];
 
 class OptionCard extends StatelessWidget {
   final String term;
-  const OptionCard({Key? key, required this.term}) : super(key: key);
+  final String file;
+  const OptionCard({Key? key, required this.term, required this.file}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +74,7 @@ class OptionCard extends StatelessWidget {
             Navigator.push(context, MaterialPageRoute(builder: (context){
               return ResultScreen(
                 title: term,
+                file: file,
               );
             }));
           },
