@@ -15,6 +15,7 @@ class OboardingScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset('assets/signoption.png'),
               const Text(
                 'Result Dashoard',
                 style: TextStyle(
@@ -25,7 +26,7 @@ class OboardingScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               const Text(
-                'Access your semester result by logining to your account\n '
+                'Access your semester result by logining to your account '
                 'or by signing up for a new account',
                 textAlign: TextAlign.center,
                 style: TextStyle(

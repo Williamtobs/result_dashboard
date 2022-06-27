@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:result_board/screen/widget/button.dart';
 import 'package:result_board/screen/widget/formfield.dart';
 
+import '../../home/dashboard.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -52,7 +54,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 )),
             const SizedBox(height: 20),
-            const FunctioningButton(text: 'Login'),
+            FunctioningButton(text: 'Login', action: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context){
+                return const Dashboard();
+              }));
+            },),
           ],
         ),
       ),

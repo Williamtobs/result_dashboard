@@ -126,7 +126,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 tap: true,
               ),
               const SizedBox(height: 20),
-              const FunctioningButton(text: 'Login'),
+              const FunctioningButton(text: 'Sign up'),
               const SizedBox(height: 20),
               RichText(
                   text: TextSpan(children: [

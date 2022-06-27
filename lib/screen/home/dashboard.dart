@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:result_board/screen/home/result/result_screen.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -7,9 +8,10 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: const Color.fromRGBO(119, 0, 187, 1),
           leading: const Icon(
             Icons.menu,
-            color: Color.fromRGBO(119, 0, 187, 1),
+            color:  Color.fromRGBO(186, 186, 255, 1),
           ),
           elevation: 0,
         ),
@@ -31,17 +33,20 @@ class Dashboard extends StatelessWidget {
                 '201925820050',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
-              GridView.builder(
-                  itemCount: _options.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      mainAxisSpacing: 5,
-                      crossAxisSpacing: 5,
-                      crossAxisCount: 2),
-                  itemBuilder: (context, index) {
-                    return OptionCard(
-                      term: _options[index].term,
-                    );
-                  })
+              const SizedBox(height: 20),
+              Expanded(
+                child: GridView.builder(
+                    itemCount: _options.length,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        mainAxisSpacing: 5,
+                        crossAxisSpacing: 5,
+                        crossAxisCount: 2),
+                    itemBuilder: (context, index) {
+                      return OptionCard(
+                        term: _options[index].term,
+                      );
+                    }),
+              )
             ]));
   }
 }
@@ -60,17 +65,29 @@ class OptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Card(
-            child: Image.asset('assets/dashboard.png'),
-            shape: Border.all(
-              color: const Color.fromRGBO(186, 186, 255, 1),
+        InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context){
+              return ResultScreen(
+                title: term,
+              );
+            }));
+          },
+          child: Container(
+            height: 150,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
             ),
-            elevation: 1,
+            child: Card(
+              child: Image.asset('assets/dashboard.png'),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                side: const BorderSide(color:  Color.fromRGBO(186, 186, 255, 1),)
+              ),
+              elevation: 1,
+            ),
           ),
         ),
         const SizedBox(height: 5),
