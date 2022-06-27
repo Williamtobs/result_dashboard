@@ -2,14 +2,14 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:screenshot/screenshot.dart';
 
 class ResultScreen extends StatefulWidget {
   final String title;
-  const ResultScreen({Key? key, required this.title}) : super(key: key);
+  final String file;
+  const ResultScreen({Key? key, required this.title, required this.file}) : super(key: key);
 
   @override
   State<ResultScreen> createState() => _ResultScreenState();
@@ -17,7 +17,6 @@ class ResultScreen extends StatefulWidget {
 
 class _ResultScreenState extends State<ResultScreen> {
 
-  Uint8List? _imageFile;
 
   //Create an instance of ScreenshotController
   ScreenshotController screenshotController = ScreenshotController();
@@ -29,9 +28,8 @@ class _ResultScreenState extends State<ResultScreen> {
         backgroundColor: const Color.fromRGBO(119, 0, 187, 1),
          onPressed: () {
            screenshotController.capture().then((Uint8List? image) {
-             printPdf(image!);
+             printPdf(image!, context, widget.file);
            }).catchError((onError) {
-             print(onError);
            });
 
          },
@@ -171,21 +169,27 @@ class ResultTile extends StatelessWidget {
   }
 }
 
-Future printPdf(Uint8List screenShot) async{
+Future printPdf(Uint8List screenShot, BuildContext context, String name) async{
   pw.Document pdf = pw.Document();
-  Directory root = await getTemporaryDirectory();
   pdf.addPage(
     pw.Page(
       pageFormat: PdfPageFormat.a4,
       build: (context) {
         return pw.Expanded(
             child: pw.Image(pw.MemoryImage(screenShot),
-                fit: pw.BoxFit.contain)
+                fit: pw.BoxFit.fill)
         );
       },
     ),
   );
-  print(root);
-  File pdfFile = File('$root/resulttt.pdf');
+  File pdfFile = File('/storage/emulated/0/Download/$name.pdf');
   pdfFile.writeAsBytesSync(await pdf.save());
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: const Text('File successfully saved.'),
+    duration: const Duration(seconds: 2),
+    action: SnackBarAction(
+      label: 'Close',
+      onPressed: () { },
+    ),
+  ));
 }
