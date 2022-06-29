@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:date_field/date_field.dart';
 import 'package:result_board/screen/auth/login/login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:result_board/screen/widget/button.dart';
 import 'package:result_board/screen/widget/formfield.dart';
 
@@ -126,7 +127,12 @@ class _SignupScreenState extends State<SignupScreen> {
                 tap: true,
               ),
               const SizedBox(height: 20),
-              const FunctioningButton(text: 'Sign up'),
+              FunctioningButton(
+                text: 'Sign up',
+                action: () {
+                  signUp(_matricNoController.text.trim());
+                },
+              ),
               const SizedBox(height: 20),
               RichText(
                   text: TextSpan(children: [
@@ -160,4 +166,15 @@ class _SignupScreenState extends State<SignupScreen> {
       ),
     );
   }
+}
+
+signUp(String matric) async {
+  FirebaseFirestore.instance
+      .collection('Matric id')
+      .get()
+      .then((QuerySnapshot querySnapshot) {
+    for (var doc in querySnapshot.docs) {
+      print(doc);
+    }
+  });
 }
