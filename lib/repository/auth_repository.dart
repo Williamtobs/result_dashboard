@@ -12,7 +12,7 @@ abstract class AuthRepository {
 }
 
 class AuthRepositoryImpl {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //check if user logged in or not
   Stream<User?> get authStateChange => _auth.authStateChanges();
@@ -33,7 +33,7 @@ class AuthRepositoryImpl {
             ),
           ));
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const Dashboard();
+            return Dashboard();
           }));
         }
       }).catchError((e){
