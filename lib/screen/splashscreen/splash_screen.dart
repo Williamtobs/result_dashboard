@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:result_board/screen/auth/onboarding.dart';
+
+import '../auth/auth_checker.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 7), () {
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const OboardingScreen()));
+          MaterialPageRoute(builder: (context) => const AuthChecker()));
     });
   }
 
@@ -32,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           const SizedBox(height: 20),
           const Text(
-            'Result Dashoard',
+            'Result Dashboard',
             style: TextStyle(
               fontSize: 30,
               color: Color.fromRGBO(119, 0, 187, 1),
