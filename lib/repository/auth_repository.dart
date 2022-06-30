@@ -36,17 +36,26 @@ class AuthRepositoryImpl {
             return const Dashboard();
           }));
         }
+      }).catchError((e){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(e.toString()),
+          duration: const Duration(seconds: 5),
+          action: SnackBarAction(
+            label: 'Close',
+            onPressed: () {},
+          ),
+        ));
       });
-    } on FirebaseAuthException catch (e) {
-      print(e.toString());
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(e.message!),
-        duration: const Duration(seconds: 2),
+        content: Text(e.toString()),
+        duration: const Duration(seconds: 5),
         action: SnackBarAction(
           label: 'Close',
           onPressed: () {},
         ),
       ));
+      print(e.toString());
     }
   }
 
@@ -75,10 +84,10 @@ class AuthRepositoryImpl {
           }));
         }
       });
-    } on FirebaseAuthException catch (e) {
+    } catch (e) {
       print(e.toString());
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(e.message!),
+        content: Text(e.toString()),
         duration: const Duration(seconds: 2),
         action: SnackBarAction(
           label: 'Close',

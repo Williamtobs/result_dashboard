@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 class FunctioningButton extends StatelessWidget {
   final String text;
-
+  final bool? load;
   final void Function()? action;
 
   const FunctioningButton({
     Key? key,
     required this.text,
+    this.load,
     this.action,
   }) : super(key: key);
 
@@ -24,7 +25,9 @@ class FunctioningButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
           child: TextButton(
               onPressed: action,
-              child: Text(
+              child: load == true ?
+              const CircularProgressIndicator(color: Colors.white,) :
+              Text(
                 text,
                 style: const TextStyle(
                   fontSize: 14,

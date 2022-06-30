@@ -4,6 +4,7 @@ class CardinFormField extends StatelessWidget {
   final TextEditingController controller;
   final bool? obscureText;
   final TextInputType keyboardType;
+  final String? Function(String?)? validator;
   final String hintText;
   final bool isPassword;
   final void Function()? iconTap;
@@ -16,6 +17,7 @@ class CardinFormField extends StatelessWidget {
     required this.keyboardType,
     required this.hintText,
     required this.isPassword,
+    required this.validator,
     this.iconTap,
     this.tap,
   }) : super(key: key);
@@ -26,6 +28,7 @@ class CardinFormField extends StatelessWidget {
       controller: controller,
       obscureText: obscureText ?? false,
       keyboardType: keyboardType,
+      validator: validator,
       style: const TextStyle(
         fontSize: 14,
         color: Colors.black,
