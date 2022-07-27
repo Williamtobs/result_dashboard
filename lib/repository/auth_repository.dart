@@ -4,10 +4,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:result_board/screen/auth/onboarding.dart';
 import 'package:result_board/screen/home/dashboard.dart';
 
+import '../screen/auth/forgot_password/email_sent.dart';
+
 abstract class AuthRepository {
   Future<AppUser> signInWithEmailAndPassword(String email, String password);
+
   Future<AppUser> signUpWithEmailAndPassword(String email, String password);
+
   Future<AppUser> signOut();
+
   Future<bool> isSignedIn();
 }
 
@@ -36,7 +41,7 @@ class AuthRepositoryImpl {
             return Dashboard();
           }));
         }
-      }).catchError((e){
+      }).catchError((e) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(e.toString()),
           duration: const Duration(seconds: 5),
@@ -61,6 +66,38 @@ class AuthRepositoryImpl {
 
   Future<void> signOut() async {
     await _auth.signOut();
+  }
+
+  Future<void> sendPasswordInfo(
+      {required BuildContext context, required String email}) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email).then((value) {
+        //print(value);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: const Text(
+              'Password reset Info sent, Check Email to follow the instruction'),
+          duration: const Duration(seconds: 2),
+          action: SnackBarAction(
+            label: 'Close',
+            onPressed: () {},
+          ),
+        ));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
+              return EmailSent(email: email,);
+            }));
+      });
+    } catch (e) {
+      print(e.toString());
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(e.toString()),
+        duration: const Duration(seconds: 2),
+        action: SnackBarAction(
+          label: 'Close',
+          onPressed: () {},
+        ),
+      ));
+    }
   }
 
   Future<void> signUpWithEmailAndPassword(

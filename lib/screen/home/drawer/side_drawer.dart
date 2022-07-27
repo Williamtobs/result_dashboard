@@ -41,7 +41,7 @@ class _DrawersState extends State<Drawers> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 10.0, right: 10),
+              padding: const EdgeInsets.only(left: 20.0, right: 20),
               child: FunctioningButton(
                 text: 'Log out',
                 action: () {

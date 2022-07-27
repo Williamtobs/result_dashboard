@@ -93,7 +93,7 @@ class Dashboard extends ConsumerWidget {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      '$matric',
+                      'Matric No: $matric',
                       style: const TextStyle(
                           fontSize: 14, fontWeight: FontWeight.w500),
                     ),

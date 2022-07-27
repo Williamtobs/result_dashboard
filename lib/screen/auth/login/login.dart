@@ -5,6 +5,7 @@ import 'package:result_board/screen/widget/formfield.dart';
 
 import '../../../provider/auth_provider.dart';
 import '../../home/dashboard.dart';
+import '../forgot_password/forgot_password.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -85,14 +86,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 },
               ),
               const SizedBox(height: 10),
-              const Align(
+              Align(
                   alignment: Alignment.bottomRight,
-                  child: Text(
-                    'Forgot Password?',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return ForgotPassword();
+                      }));
+                      //ForgotPassword
+                    },
+                    child: const Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   )),
               const SizedBox(height: 20),
