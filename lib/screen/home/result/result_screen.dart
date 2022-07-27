@@ -87,7 +87,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   );
                 }
                 else{
-                  final data = snapshot.data![widget.examType];
+                  var data = snapshot.data![widget.examType];
                   return Screenshot(
                     controller: screenshotController,
                     child: Column(
